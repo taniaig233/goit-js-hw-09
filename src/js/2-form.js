@@ -9,8 +9,8 @@ let dataForm = JSON.parse(localStorage.getItem(LOCAL_KEY)) || {};
 const { email, message } = formFeedback.elements;
 reloadPage();
 
-function onInputData(e) {
-  dataForm = { email: email.value, message: message.value };
+function onInputData(event) {
+  dataForm = { email: email.value.trim(), message: message.value.trim() };
   localStorage.setItem(LOCAL_KEY, JSON.stringify(dataForm));
 }
 
@@ -23,11 +23,11 @@ function reloadPage() {
 
 function onFormSubmit(event) {
   event.preventDefault();
-  console.log({ email: email.value, message: message.value });
-
+  
   if (email.value === '' || message.value === '') {
     return alert('Please fill in all the fields!');
   }
+  console.log({ email: email.value, message: message.value });
 
   localStorage.removeItem(LOCAL_KEY);
   event.currentTarget.reset();
